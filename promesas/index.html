@@ -92,7 +92,7 @@ const J=[
  {id:'ind-2021',n:'IND.',a:2021,t:'Industrial',x:'Una vía de acceso que se vuelve paseo: árboles de copa ancha que dan sombra a la llegada.',r:['2021-ind-1']}
 ];
 function lista(el,arr){
-  el.innerHTML=arr.map((j,i)=>`<a href="#${j.id}" data-id="${j.id}">${i===0||arr[i-1].a!==j.a?`<sup>${j.a}</sup>`:''}${j.n}</a><span class="p">${i<arr.length-1?', ':'.'}</span>`).join('');
+  el.innerHTML=arr.map((j,i)=>`<a href="#${j.id}" data-id="${j.id}">${i===0||arr[i-1].a!==j.a?`<sup>${j.a}</sup>`:''}${j.n}</a><span class="p">${i<arr.length-1?', ':(j.n.endsWith('.')?'':'.')}</span>`).join('');
 }
 lista(document.getElementById('proyectos'),[...J].sort((a,b)=>b.a-a.a));
 const url=f=>`/promesas/${f}.jpg`;
