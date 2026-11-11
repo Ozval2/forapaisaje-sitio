@@ -62,8 +62,7 @@ nav.pie a:hover{border-color:var(--linea)}
 <header class="top"><a href="/" aria-label="FORA, inicio"><img src="/logo-fora-palabra.svg" alt="Fora"></a></header>
 <p class="aviso">borrador · nombres y fotos de prueba</p>
 <main>
-  <section class="grupo"><span class="et">jardines privados</span><p class="lista" id="privados"></p></section>
-  <section class="grupo"><span class="et">jardines públicos</span><p class="lista" id="publicos"></p></section>
+  <section class="grupo"><span class="et">proyectos</span><p class="lista" id="proyectos"></p></section>
 </main>
 <nav class="pie"><a href="/">Inicio</a><a href="/origen/">Origen</a><a href="/tiempo/">Tiempo</a><a href="mailto:hola@forapaisaje.com">Escríbenos</a></nav>
 <div id="prev"></div>
@@ -117,8 +116,7 @@ const J=[
 function lista(el,arr){
   el.innerHTML=arr.map((j,i)=>`<a href="#${j.id}" data-id="${j.id}"><sup>${j.a}</sup>${j.n}</a><span class="p">${i<arr.length-1?', ':'.'}</span>`).join('');
 }
-lista(document.getElementById('privados'),J.filter(j=>j.t==='priv'));
-lista(document.getElementById('publicos'),J.filter(j=>j.t==='pub'));
+lista(document.getElementById('proyectos'),[...J].sort((a,b)=>b.a-a.a));
 // vista previa al pasar
 const prev=document.getElementById('prev');
 document.querySelectorAll('.lista a').forEach((a,i)=>{
