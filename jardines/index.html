@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jardines · FORA</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#231F20">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fora.css">
+<style>
+:root{--piedra:#231F20;--crema:#F4EFE4;--suave:#E4DED2;--gris:#A9A397;--desc:#B8B2A6;--linea:rgba(244,239,228,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--piedra);color:var(--crema);font-family:Inter,system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.top{display:flex;justify-content:center;padding:40px 24px 0}
+.top img{height:30px;width:auto;display:block}
+.aviso{text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);margin-top:18px}
+main{max-width:1080px;margin:0 auto;padding:clamp(72px,12vh,140px) 24px 96px}
+.grupo{display:grid;grid-template-columns:28px 1fr;gap:16px;margin-bottom:72px}
+.grupo .et{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);align-self:start}
+.lista{font-family:"Fora Display",Inter,sans-serif;text-transform:lowercase;font-size:clamp(34px,5.4vw,68px);line-height:1.22}
+.lista a{display:inline;position:relative;background-size:cover;background-position:center;-webkit-background-clip:text;background-clip:text;color:transparent;transition:opacity .3s}
+.lista sup{font-family:Inter,sans-serif;font-size:11px;letter-spacing:.08em;color:var(--gris);vertical-align:top;position:relative;top:.6em;margin-right:4px;-webkit-text-fill-color:var(--gris)}
+.lista .p{color:var(--desc)}
+.lista:hover a{opacity:.45}.lista a:hover{opacity:1}
+#prev{position:fixed;width:300px;aspect-ratio:4/3;pointer-events:none;opacity:0;transition:opacity .25s;z-index:5;background-size:cover;background-position:center}
+nav.pie{display:flex;justify-content:center;gap:44px;padding:0 24px 56px;flex-wrap:wrap}
+nav.pie a{font-size:11px;letter-spacing:.34em;text-transform:uppercase;padding:12px 0;border-bottom:1px solid transparent;transition:border-color .3s}
+nav.pie a:hover{border-color:var(--linea)}
+/* ficha */
+#ficha{position:fixed;inset:0;background:var(--piedra);z-index:10;display:none;grid-template-columns:minmax(240px,300px) 1fr}
+#ficha.on{display:grid}
+.col{padding:40px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--linea);overflow:auto}
+.col h2{font-family:"Fora Display",Inter,sans-serif;font-weight:300;text-transform:lowercase;font-size:34px;line-height:1.1}
+.datos{margin-top:40px}
+.datos dt{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);margin-top:20px}
+.datos dd{font-size:13px;letter-spacing:.04em;line-height:1.8;color:var(--suave)}
+.lugar{font-size:13px;line-height:2;letter-spacing:.04em;color:var(--suave);margin-top:40px}
+.cerrar{font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin-top:40px;background:none;border:0;color:var(--crema);cursor:pointer;text-align:left;font-family:inherit}
+.tira{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;height:100vh;padding:40px 40px 40px 12px;scroll-snap-type:x proximity;scrollbar-width:none}
+.tira::-webkit-scrollbar{display:none}
+.cuadro{flex:0 0 auto;height:100%;background-size:cover;background-position:center;scroll-snap-align:start;position:relative}
+.cuadro span{position:absolute;left:12px;bottom:10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,239,228,.7)}
+.flechas[hidden]{display:none!important}
+.flechas{position:fixed;right:28px;bottom:24px;display:flex;gap:10px;z-index:11}
+.flechas button{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:rgba(35,31,32,.6);color:var(--crema);font-size:16px;cursor:pointer}
+@media(max-width:760px){
+  #ficha.on{display:block;overflow-y:auto}
+  .col{border-right:0;border-bottom:1px solid var(--linea);padding:28px 24px}
+  .tira{height:62vh;padding:16px 24px}
+  .flechas{display:none}
+  nav.pie{gap:28px}
+  #prev{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><a href="/" aria-label="FORA, inicio"><img src="/logo-fora-palabra.svg" alt="Fora"></a></header>
+<p class="aviso">borrador · nombres y fotos de prueba</p>
+<main>
+  <section class="grupo"><span class="et">jardines privados</span><p class="lista" id="privados"></p></section>
+  <section class="grupo"><span class="et">jardines públicos</span><p class="lista" id="publicos"></p></section>
+</main>
+<nav class="pie"><a href="/">Inicio</a><a href="/origen/">Origen</a><a href="/tiempo/">Tiempo</a><a href="mailto:hola@forapaisaje.com">Escríbenos</a></nav>
+<div id="prev"></div>
+
+<section id="ficha" aria-modal="true" role="dialog">
+  <div class="col">
+    <div>
+      <h2 id="f-nombre"></h2>
+      <dl class="datos">
+        <dt>lugar</dt><dd id="f-lugar"></dd>
+        <dt>año</dt><dd id="f-anio"></dd>
+        <dt>especies</dt><dd id="f-especies"></dd>
+      </dl>
+      <p class="lugar" id="f-texto"></p>
+    </div>
+    <button class="cerrar" id="cerrar">← jardines</button>
+  </div>
+  <div class="tira" id="tira"></div>
+</section>
+<div class="flechas" id="flechas" hidden><button id="ant" aria-label="anterior">←</button><button id="sig" aria-label="siguiente">→</button></div>
+
+<script>
+// ---- fotos de prueba: texturas generadas con los tonos de cada jardín ----
+const PAL={
+  humedo:['#2F4A2B','#56713A','#8BA05A','#C9C79A','#1E2B1C'],
+  seco:['#7A6038','#B08B4F','#D9C08A','#5E6B45','#3B3226'],
+  flor:['#5B3F6B','#9A6FA8','#C9A3C2','#5F7A45','#2E3324'],
+  niebla:['#7F8784','#A9B2AC','#D3D6CE','#4E5A50','#2F3632'],
+  espiga:['#B89A4A','#E0C978','#8C8A55','#F1E3B5','#4F4A2C']
+};
+function rnd(s){return()=>{s=(s*9301+49297)%233280;return s/233280}}
+const GRANO="url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")";
+function textura(pal,seed){
+  const r=rnd(seed),c=PAL[pal];let capas=[GRANO];
+  for(let i=0;i<9;i++){const x=Math.round(r()*100),y=Math.round(r()*100),s=Math.round(25+r()*60);capas.push(`radial-gradient(${s}% ${Math.round(s*(.6+r()))}% at ${x}% ${y}%, ${c[i%5]} 0%, transparent 70%)`)}
+  capas.push(`linear-gradient(${Math.round(r()*360)}deg, ${c[0]}, ${c[2]})`);
+  return capas.join(',');
+}
+// ---- jardines (de prueba) ----
+const J=[
+ {id:'yunguilla',n:'Yunguilla',t:'priv',a:2024,l:'Yunguilla, Azuay',p:'seco',e:'Agave americana, Stipa ichu, Opuntia, Bougainvillea',x:'En Yunguilla el sol cae vertical y la lluvia llega tarde. El jardín aprendió a esperar.'},
+ {id:'challuabamba',n:'Challuabamba',t:'priv',a:2023,l:'Challuabamba, Cuenca',p:'humedo',e:'Alnus acuminata, Chusquea, helechos, Salvia',x:'Un bosque de alisos que ya estaba ahí. Solo abrimos un claro para mirar.'},
+ {id:'turi',n:'Turi',t:'priv',a:2022,l:'Turi, Cuenca',p:'espiga',e:'Calamagrostis, Stipa, Achillea, Echinacea',x:'Desde la loma se ve la ciudad entera. Las espigas se mueven con el mismo viento.'},
+ {id:'paccha',n:'Paccha',t:'priv',a:2025,l:'Paccha, Cuenca',p:'flor',e:'Salvia, Verbena bonariensis, Tibouchina, Lavandula',x:'Un jardín que florece en morado cuando el resto del valle está seco.'},
+ {id:'sayausi',n:'Sayausí',t:'priv',a:2021,l:'Sayausí, Cuenca',p:'niebla',e:'Polylepis, Puya, Espeletia, musgos',x:'A esta altura la neblina riega más que la lluvia.'},
+ {id:'gualaceo',n:'Gualaceo',t:'priv',a:2020,l:'Gualaceo, Azuay',p:'humedo',e:'Citrus, Musa, Heliconia, Alocasia',x:'Junto al río, donde todo crece demasiado rápido.'},
+ {id:'racar',n:'Racar',t:'pub',a:2023,l:'Racar, Cuenca',p:'espiga',e:'Festuca, Muehlenbeckia, Schinus molle',x:'Una plaza que se deja llenar de pasto alto.'},
+ {id:'tomebamba',n:'Orillas del Tomebamba',t:'pub',a:2022,l:'Cuenca',p:'humedo',e:'Salix humboldtiana, Equisetum, Juncus',x:'El río decide dónde termina el jardín.'},
+ {id:'banos',n:'Baños',t:'pub',a:2024,l:'Baños, Cuenca',p:'niebla',e:'Cortaderia, Agave, Echeveria',x:'Piedra, vapor y plantas que aguantan ambos.'}
+];
+function lista(el,arr){
+  el.innerHTML=arr.map((j,i)=>`<a href="#${j.id}" data-id="${j.id}"><sup>${j.a}</sup>${j.n}</a><span class="p">${i<arr.length-1?', ':'.'}</span>`).join('');
+  el.querySelectorAll('a').forEach((a,i)=>a.style.backgroundImage=textura(arr[i].p,i*37+11));
+}
+lista(document.getElementById('privados'),J.filter(j=>j.t==='priv'));
+lista(document.getElementById('publicos'),J.filter(j=>j.t==='pub'));
+// vista previa al pasar
+const prev=document.getElementById('prev');
+document.querySelectorAll('.lista a').forEach((a,i)=>{
+  const j=J.find(x=>x.id===a.dataset.id);
+  a.addEventListener('mouseenter',()=>{prev.style.backgroundImage=textura(j.p,j.a*7);prev.style.opacity=1});
+  a.addEventListener('mouseleave',()=>prev.style.opacity=0);
+  a.addEventListener('mousemove',e=>{prev.style.left=(e.clientX+24)+'px';prev.style.top=(e.clientY-120)+'px'});
+});
+// ficha
+const ficha=document.getElementById('ficha'),tira=document.getElementById('tira'),fl=document.getElementById('flechas');
+const ANCHOS=[2.2,1.5,.8,1.5,.75,1.2,.9]; const ET=['paisaje','recorrido','planta','textura','detalle','luz','hoja'];
+function abrir(id){
+  const j=J.find(x=>x.id===id); if(!j) return cerrar();
+  document.getElementById('f-nombre').textContent=j.n;
+  document.getElementById('f-lugar').textContent=j.l;
+  document.getElementById('f-anio').textContent=j.a;
+  document.getElementById('f-especies').textContent=j.e;
+  document.getElementById('f-texto').textContent=j.x;
+  tira.innerHTML=ANCHOS.map((w,i)=>`<div class="cuadro" style="aspect-ratio:${w}"><span>${ET[i]}</span></div>`).join('');
+  tira.querySelectorAll('.cuadro').forEach((c,i)=>c.style.backgroundImage=textura(j.p,j.a+i*53));
+  tira.scrollLeft=0; ficha.classList.add('on'); fl.hidden=false; document.body.style.overflow='hidden';
+  document.title=j.n+' · Jardines · FORA';
+}
+function cerrar(){ficha.classList.remove('on');fl.hidden=true;document.body.style.overflow='';document.title='Jardines · FORA';if(location.hash)history.pushState('',document.title,location.pathname)}
+window.addEventListener('hashchange',()=>location.hash?abrir(location.hash.slice(1)):cerrar());
+if(location.hash) abrir(location.hash.slice(1));
+document.getElementById('cerrar').onclick=cerrar;
+document.addEventListener('keydown',e=>{if(!ficha.classList.contains('on'))return;if(e.key==='Escape')cerrar();if(e.key==='ArrowRight')tira.scrollBy({left:innerWidth*.6,behavior:'smooth'});if(e.key==='ArrowLeft')tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'})});
+document.getElementById('sig').onclick=()=>tira.scrollBy({left:innerWidth*.6,behavior:'smooth'});
+document.getElementById('ant').onclick=()=>tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'});
+// la rueda del mouse avanza la tira de lado
+tira.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&innerWidth>760){tira.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
+</script>
+</body>
+</html>
