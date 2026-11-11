@@ -43,7 +43,7 @@ nav.pie a:hover{border-color:var(--linea)}
 .cerrar{font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin-top:40px;background:none;border:0;color:var(--crema);cursor:pointer;text-align:left;font-family:inherit}
 .tira{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;height:100vh;padding:40px 40px 40px 12px;scroll-snap-type:x proximity;scrollbar-width:none}
 .tira::-webkit-scrollbar{display:none}
-.cuadro{flex:0 0 auto;height:100%;aspect-ratio:16/9;max-width:calc(100vw - 380px);background-size:cover;background-position:center;scroll-snap-align:start;position:relative}
+.cuadro{flex:0 0 auto;height:auto;align-self:center;aspect-ratio:16/9;width:min(calc(100vw - 400px),calc((100vh - 80px)*16/9));background-size:cover;background-position:center;scroll-snap-align:start;position:relative}
 .cuadro span{position:absolute;left:12px;bottom:10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,239,228,.7)}
 .flechas[hidden]{display:none!important}
 .flechas{position:fixed;right:28px;bottom:24px;display:flex;gap:10px;z-index:11}
