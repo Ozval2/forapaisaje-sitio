@@ -90,7 +90,7 @@ nav.pie a:hover{border-color:var(--linea)}
 const J=[
  {id:'ev-2021',n:'E.V.',a:2021,t:'Residencial',x:'Una casa de ladrillo y hormigón asentada en la ladera. Patios de grava, helechos y árboles que se ven a través del vidrio.',r:['2021-ev-1','2021-ev-2','2021-ev-3','2021-ev-4','2021-ev-5','2021-ev-6']},
  {id:'lu-2021',n:'L.U.',a:2021,t:'Residencial',x:'Una casa en terrazas abierta a las montañas. Bordes de perennes que bajan con la pendiente hasta el césped.',r:['2021-lu-1','2021-lu-2','2021-lu-3','2021-lu-4','2021-lu-5']},
- {id:'ind-2021',n:'IND.',a:2021,t:'Industrial',x:'Una vía de acceso que se vuelve paseo: árboles de copa ancha que dan sombra a la llegada.',r:['2021-ind-1']}
+ {id:'ind-2021',n:'IND.',a:2021,t:'Industrial',x:'Una nave industrial rodeada de bosque. El acceso se vuelve paseo y los árboles de copa ancha suavizan la escala.',r:['2021-ind-1','2021-ind-2','2021-ind-3','2021-ind-4','2021-ind-5']}
 ];
 function lista(el,arr){
   el.innerHTML=arr.map((j,i)=>`<a href="#${j.id}" data-id="${j.id}">${i===0||arr[i-1].a!==j.a?`<sup>${j.a}</sup>`:''}${j.n}</a><span class="p">${i<arr.length-1?', ':(j.n.endsWith('.')?'':'.')}</span>`).join('');
