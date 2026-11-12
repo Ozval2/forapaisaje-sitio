@@ -130,10 +130,10 @@ function abrir(id){
   document.getElementById('f-tipo').textContent=j.t;
   document.getElementById('f-texto').textContent=j.x;
   tira.innerHTML=j.r.map((f,i)=>`<div class="cuadro" role="img" aria-label="render ${j.n} ${i+1}" style="background-image:url(${url(f)})"><span>${String(i+1).padStart(2,'0')} / ${String(j.r.length).padStart(2,'0')}</span></div>`).join('');
-  tira.scrollLeft=0; ficha.classList.add('on'); fl.hidden=j.r.length<2; document.body.style.overflow='hidden';
+  ficha.classList.add('on'); tira.scrollTo({left:0,behavior:'instant'}); requestAnimationFrame(()=>tira.scrollTo({left:0,behavior:'instant'})); fl.hidden=j.r.length<2; document.body.style.overflow='hidden';
   document.title=j.n+' · Promesas · FORA';
 }
-function cerrar(){ficha.classList.remove('on');fl.hidden=true;document.body.style.overflow='';document.title='Promesas · FORA';if(location.hash)history.pushState('',document.title,location.pathname)}
+function cerrar(){tira.scrollTo({left:0,behavior:'instant'});ficha.classList.remove('on');fl.hidden=true;document.body.style.overflow='';document.title='Promesas · FORA';if(location.hash)history.pushState('',document.title,location.pathname)}
 window.addEventListener('hashchange',()=>location.hash?abrir(location.hash.slice(1)):cerrar());
 if(location.hash) abrir(location.hash.slice(1));
 document.getElementById('cerrar').onclick=cerrar;
