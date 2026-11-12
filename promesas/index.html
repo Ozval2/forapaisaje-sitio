@@ -146,14 +146,31 @@ function abrir(id){
   tira.innerHTML=j.r.map((f,i)=>`<div class="cuadro" role="img" aria-label="render ${j.n} ${i+1}" style="background-image:url(${url(f)})"><span>${String(i+1).padStart(2,'0')} / ${String(j.r.length).padStart(2,'0')}</span></div>`).join('');
   ficha.classList.add('on'); tira.scrollTo({left:0,behavior:'instant'}); requestAnimationFrame(()=>tira.scrollTo({left:0,behavior:'instant'})); fl.hidden=j.r.length<2; document.body.style.overflow='hidden';
   document.title=j.n+' · Promesas · FORA';
+  iniciarAuto();
 }
-function cerrar(){tira.scrollTo({left:0,behavior:'instant'});ficha.classList.remove('on');fl.hidden=true;document.body.style.overflow='';document.title='Promesas · FORA';if(location.hash)history.pushState('',document.title,location.pathname)}
+function cerrar(){detenerAuto();tira.scrollTo({left:0,behavior:'instant'});ficha.classList.remove('on');fl.hidden=true;document.body.style.overflow='';document.title='Promesas · FORA';if(location.hash)history.pushState('',document.title,location.pathname)}
+// las fotos corren solas cada 5 s; si el visitante interactúa, esperan 8 s; al final vuelven al inicio
+let auto=null,ultimo=0;
+const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function iniciarAuto(){detenerAuto();if(quieto||tira.children.length<2)return;ultimo=Date.now();auto=setInterval(avanzar,5000)}
+function detenerAuto(){if(auto){clearInterval(auto);auto=null}}
+function tocar(){ultimo=Date.now()}
+function avanzar(){
+  if(!ficha.classList.contains('on')||document.hidden||Date.now()-ultimo<8000)return;
+  const pad=parseFloat(getComputedStyle(tira).paddingLeft)||0,base=tira.getBoundingClientRect().left;
+  const pos=[...tira.children].map(c=>tira.scrollLeft+c.getBoundingClientRect().left-base-pad);
+  const fin=tira.scrollLeft>=tira.scrollWidth-tira.clientWidth-4;
+  let sig=pos.find(p=>p>tira.scrollLeft+8);
+  if(fin||sig===undefined)sig=0;
+  tira.scrollTo({left:sig,behavior:'smooth'});
+}
+['wheel','pointerdown','touchstart'].forEach(ev=>tira.addEventListener(ev,tocar,{passive:true}));
 window.addEventListener('hashchange',()=>location.hash?abrir(location.hash.slice(1)):cerrar());
 if(location.hash) abrir(location.hash.slice(1));
 document.getElementById('cerrar').onclick=cerrar;
-document.addEventListener('keydown',e=>{if(!ficha.classList.contains('on'))return;if(e.key==='Escape')cerrar();if(e.key==='ArrowRight')tira.scrollBy({left:innerWidth*.6,behavior:'smooth'});if(e.key==='ArrowLeft')tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'})});
-document.getElementById('sig').onclick=()=>tira.scrollBy({left:innerWidth*.6,behavior:'smooth'});
-document.getElementById('ant').onclick=()=>tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'});
+document.addEventListener('keydown',e=>{if(!ficha.classList.contains('on'))return;tocar();if(e.key==='Escape')cerrar();if(e.key==='ArrowRight')tira.scrollBy({left:innerWidth*.6,behavior:'smooth'});if(e.key==='ArrowLeft')tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'})});
+document.getElementById('sig').onclick=()=>{tocar();tira.scrollBy({left:innerWidth*.6,behavior:'smooth'})};
+document.getElementById('ant').onclick=()=>{tocar();tira.scrollBy({left:-innerWidth*.6,behavior:'smooth'})};
 tira.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&innerWidth>760){tira.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
 </script>
 </body>
