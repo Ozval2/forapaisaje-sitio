@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivero · FORA</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#231F20">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fora.css">
+<style>
+:root{--piedra:#231F20;--crema:#F4EFE4;--suave:#E4DED2;--gris:#A9A397;--desc:#B8B2A6;--linea:rgba(244,239,228,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--piedra);color:var(--crema);font-family:Inter,system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.top{display:flex;justify-content:center;padding:40px 24px 0}
+.top img{height:30px;width:auto;display:block}
+.aviso{text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);margin-top:18px}
+.cine{max-width:1180px;margin:clamp(40px,7vh,72px) auto 0;padding:0 24px}
+.cine video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#2c2728}
+main{max-width:1180px;margin:0 auto;padding:clamp(64px,10vh,120px) 24px 96px}
+.cab{display:grid;grid-template-columns:28px 1fr;gap:20px}
+.et{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);align-self:start}
+h1{font-family:"Fora Display",Inter,sans-serif;font-weight:300;text-transform:lowercase;font-size:clamp(30px,3.4vw,40px);line-height:1.3;max-width:640px}
+.intro{font-size:13px;line-height:2.1;letter-spacing:.06em;color:var(--suave);max-width:520px;margin-top:28px}
+.datos{display:flex;gap:56px;flex-wrap:wrap;margin:56px 0 0 48px}
+.datos dt{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.datos dd{font-size:13px;letter-spacing:.04em;line-height:1.8;color:var(--suave);max-width:240px}
+.plantas{margin-top:clamp(72px,12vh,140px)}
+.reja{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.4vw,20px)}
+.reja div{aspect-ratio:4/5;background:#2c2728 center/cover no-repeat}
+nav.pie{display:flex;justify-content:center;gap:44px;padding:0 24px 56px;flex-wrap:wrap}
+nav.pie a{font-size:11px;letter-spacing:.34em;text-transform:uppercase;padding:12px 0;border-bottom:1px solid transparent;transition:border-color .3s}
+nav.pie a:hover{border-color:var(--linea)}
+@media(max-width:760px){
+  .cab{grid-template-columns:1fr;gap:16px}.et{writing-mode:horizontal-tb;transform:none}
+  .datos{margin-left:0;gap:32px}
+  .reja{grid-template-columns:repeat(2,1fr)}
+  nav.pie{gap:28px}
+}
+</style>
+</head>
+<body>
+<header class="top"><a href="/" aria-label="FORA, inicio"><img src="/logo-fora-palabra.svg" alt="Fora"></a></header>
+<p class="aviso">borrador · fotos de prueba</p>
+<div class="cine">
+  <video src="/vivero/vivero.mp4" poster="/vivero/poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="El vivero de FORA en Guachapala"></video>
+</div>
+<main>
+  <section class="cab">
+    <span class="et">vivero</span>
+    <div>
+      <h1>todo paisaje tiene un origen.</h1>
+      <p class="intro">Antes de llegar a un jardín, cada planta pasa por nuestras manos. En nuestro vivero de Guachapala cultivamos árboles, arbustos, perennes y gramíneas para que cada proyecto empiece con plantas que ya conocemos: cómo crecen, cómo florecen y cómo responden al lugar.</p>
+    </div>
+  </section>
+  <dl class="datos">
+    <div><dt>lugar</dt><dd>Guachapala, Azuay</dd></div>
+    <div><dt>producción</dt><dd>Árboles, arbustos, perennes y gramíneas</dd></div>
+    <div><dt>destino</dt><dd>Los jardines que diseñamos</dd></div>
+  </dl>
+  <section class="plantas cab">
+    <span class="et">plantas</span>
+    <div class="reja">
+      <div style="background-image:url(/vivero/prueba-1.jpg)"></div>
+      <div style="background-image:url(/vivero/prueba-2.jpg)"></div>
+      <div style="background-image:url(/vivero/prueba-3.jpg)"></div>
+      <div style="background-image:url(/vivero/prueba-4.jpg)"></div>
+      <div style="background-image:url(/vivero/prueba-5.jpg)"></div>
+      <div style="background-image:url(/vivero/prueba-6.jpg)"></div>
+    </div>
+  </section>
+</main>
+<nav class="pie"><a href="/">Inicio</a><a href="https://www.instagram.com/fora_paisajismo/" rel="noopener">Instagram</a><a href="mailto:hola@forapaisaje.com">Escríbenos</a></nav>
+</body>
+</html>
