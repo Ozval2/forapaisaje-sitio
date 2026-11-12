@@ -32,7 +32,10 @@ h1{font-family:"Fora Display",Inter,sans-serif;font-weight:300;text-transform:lo
 .datos{display:flex;gap:56px;flex-wrap:wrap;margin:56px 0 0 48px}
 .datos dt{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
 .datos dd{font-size:13px;letter-spacing:.04em;line-height:1.8;color:var(--suave);max-width:240px}
-.plantas{margin-top:clamp(72px,12vh,140px)}
+.plantas,.produce{margin-top:clamp(72px,12vh,140px)}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.4vw,20px)}
+.par img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#2c2728}
+.nota{font-size:13px;line-height:2.1;letter-spacing:.06em;color:var(--suave);max-width:520px;margin-top:28px}
 .reja{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,20px)}
 .reja div{aspect-ratio:4/5;background:#2c2728 center/cover no-repeat}
 nav.pie{display:flex;justify-content:center;gap:44px;padding:0 24px 56px;flex-wrap:wrap}
@@ -66,6 +69,16 @@ nav.pie a:hover{border-color:var(--linea)}
     <div><dt>producción</dt><dd>Árboles, arbustos, perennes y gramíneas</dd></div>
     <div><dt>destino</dt><dd>Los jardines que diseñamos</dd></div>
   </dl>
+  <section class="produce cab">
+    <span class="et">producción</span>
+    <div>
+      <div class="par">
+        <img src="/vivero/invernadero-1.jpg" alt="Bandejas de plantas jóvenes bajo malla de sombra en el vivero" loading="lazy">
+        <img src="/vivero/invernadero-2.jpg" alt="Mesas de cultivo con riego por nebulización en el invernadero" loading="lazy">
+      </div>
+      <p class="nota">Bajo malla de sombra y riego por nebulización, cada planta crece en bandeja hasta estar lista para su lugar definitivo. Cuando llega al jardín, ya sabemos de dónde viene.</p>
+    </div>
+  </section>
   <section class="plantas cab">
     <span class="et">plantas</span>
     <div class="reja">
@@ -81,6 +94,14 @@ nav.pie a:hover{border-color:var(--linea)}
       <div style="background-image:url(/vivero/planta-10.jpg)"></div>
       <div style="background-image:url(/vivero/planta-11.jpg)"></div>
       <div style="background-image:url(/vivero/planta-12.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-13.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-14.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-15.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-16.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-17.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-18.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-19.jpg)"></div>
+      <div style="background-image:url(/vivero/planta-20.jpg)"></div>
     </div>
   </section>
 </main>
